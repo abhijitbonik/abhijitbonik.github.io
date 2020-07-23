@@ -16,17 +16,17 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Abhijit Bonik's - Technical Blogs"
+title                    : "Abhijit Bonik's - Technical Site"
 title_separator          : "|"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Abhijit Bonik"
-description              : "A technical time traveler's blog."
+description              : "A technical time traveler's Site."
 url                      : "https://abhijitbonik.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "abhijitbonik/abhijitbonik.gtihub.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
-masthead_title           : "AB's Technical Blogs"# overrides the website title displayed in the masthead, use " " for no title
+masthead_title           : "#Recursive Abhi"# overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs            : true # true, false (default)
 words_per_minute         : 200
 comments:
@@ -94,8 +94,8 @@ analytics:
 # Site Author
 author:
   name             : "Abhijit Bonik"
-  avatar           : "/assets/images/IMG_20200701_010445.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am a **Software** developer who loves to travel and watch non-linear movies."
+  avatar           : "/assets/images/IMG_20200701_010426.jpg" # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : "Software Engineer"
   location         : "Mumbai"
   links:
     - label: "Email"
