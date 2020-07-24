@@ -22,7 +22,7 @@ subtitle                 : # site tagline that appears below site title in masth
 name                     : "Abhijit Bonik"
 description              : "A technical time traveler's Site."
 url                      : "https://abhijitbonik.github.io"
-baseurl                  : # the subpath of your site, e.g. "/blog"
+baseurl                  : "/"# the subpath of your site, e.g. "/blog"
 repository               : "abhijitbonik/abhijitbonik.gtihub.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
