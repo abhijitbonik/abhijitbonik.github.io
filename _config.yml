@@ -141,7 +141,6 @@ footer:
 include:
   - .htaccess
   - _pages
-  - Gemfile
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
@@ -156,6 +155,7 @@ exclude:
   - Capfile
   - CHANGELOG
   - config
+  - Gemfile
   - Gruntfile.js
   - gulpfile.js
   - LICENSE
@@ -215,6 +215,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-remote-theme
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -276,4 +277,4 @@ defaults:
       share: true
       related: true
 
-
+remote_theme: minimal-mistakes-jekyll
