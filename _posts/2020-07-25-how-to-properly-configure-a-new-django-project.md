@@ -5,7 +5,7 @@ date:   2020-07-24 00:30:07 +0530
 categories: Django
 tags: python django virtualenv linux postgres beginners
 header:
-  image: /assets/images/configure_django.png
+  image: /assets/images/configure_django.jpg
 last_modified_at: 2020-08-3 17:30:07 +0530
 ---
 
