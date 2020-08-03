@@ -4,6 +4,9 @@ title:  "How to properly configure a new Django project."
 date:   2020-07-24 00:30:07 +0530
 categories: Django
 tags: python django virtualenv linux postgres beginners
+header:
+  image: /assets/images/configure_django.png
+last_modified_at: 2020-08-3 17:30:07 +0530
 ---
 
 Django is a high-level Python Web framework that encourages rapid development and clean, pragmatic design. In this tutorial, I will show how to properly configure a new Django project and best practices to be followed while development. This tutorial also expects that you are a new Django programmer who is looking for initial best practices to be followed while setting up a Django project.
