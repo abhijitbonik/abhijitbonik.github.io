@@ -99,9 +99,6 @@ author:
   bio              : "Software Developer"
   location         : "Mumbai"
   links:
-    - label: "Email"
-      icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:abhijitbonik@gmail.com"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/abhijitbonik/"
