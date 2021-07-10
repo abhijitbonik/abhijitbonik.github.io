@@ -6,7 +6,7 @@ author_profile: true
 ---
 
 
-*[:arrow_down:](https://abhijitbonik.com/resume.pdf){:target="_blank"}
+*[Download](https://abhijitbonik.com/resume.pdf){:target="_blank"} :arrow_down:
 
 ## Profile Summary
 
