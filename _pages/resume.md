@@ -1,12 +1,9 @@
 ---
-title: "Resume"
+title: "Resume"[:arrow_down:](https://abhijitbonik.com/resume.pdf){:target="_blank"} 
 layout: single
 permalink: /resume/
 author_profile: true
 ---
-
-
-[:arrow_down:](https://abhijitbonik.com/resume.pdf){:target="_blank"} 
 
 ## Profile Summary
 
