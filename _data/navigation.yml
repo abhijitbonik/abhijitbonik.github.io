@@ -1,12 +1,12 @@
 main:
   - title: "Posts"
     url: /year-archive/
-  - title: "About Me"
-    url: /about_me/
   - title: "Projects"
     url: /projects/
   - title: "Categories"
     url: /categories/
+  - title: "About Me"
+    url: /about_me/
   - title: "Resume"
     url: /resume/
 
