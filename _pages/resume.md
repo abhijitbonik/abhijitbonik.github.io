@@ -6,6 +6,8 @@ author_profile: true
 ---
 
 
+*[:arrow_down:](https://abhijitbonik.com/resume.pdf){:target="_blank"}
+
 ## Profile Summary
 
 I am currently working as a Project Software Engineer at Spoken Tutorial, IIT Bombay.
@@ -53,7 +55,7 @@ have also manage website content in multiple projects for various clients.
 
 ## Certifications
 
-* [**DL0110EN: Deep Learning with Python and PyTorch , IBM, EdX.**](https://courses.edx.org/certificates/1a59f66a3a344a929efefb0c13af2bf7)
+* [**DL0110EN: Deep Learning with Python and PyTorch , IBM, EdX.**](https://courses.edx.org/certificates/1a59f66a3a344a929efefb0c13af2bf7){:target="_blank"}
 
 ## Major Projects
 
@@ -87,7 +89,7 @@ using HAproxy, Nginx, Memcache, MySql. Create a Real-time Collaborative editing 
 using Django and integrated Etherpad APIs. Created multiple task queue using Celery, Redis
 and Python for executing large task asynchronously.
 
-## Major Projects
+## Declaration
 
 I hereby declare that all the above-mentioned facts and information are true to the best of my
 knowledge. I shall be solely responsible for any discrepancy found in them.
