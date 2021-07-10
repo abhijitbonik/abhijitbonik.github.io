@@ -7,4 +7,6 @@ main:
     url: /projects/
   - title: "Categories"
     url: /categories/
+  - title: "Resume"
+    url: /resume/
 
