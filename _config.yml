@@ -22,7 +22,7 @@ title_separator          : "|"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Abhijit Bonik"
 description              : "A technical time traveler's Site."
-url                      : "https://abhijitbonik.com"
+url                      : "https://abhijitbonik.github.io"
 baseurl                  : ""# the subpath of your site, e.g. "/blog"
 repository               : "abhijitbonik/abhijitbonik.gtihub.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
