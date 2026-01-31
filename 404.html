@@ -1,25 +1,58 @@
----
-permalink: /404.html
-layout: default
----
-
-<style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
-
-<div class="container">
-  <h1>404</h1>
-
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0f;
+            color: #e4e4ef;
+            font-family: 'Share Tech Mono', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 24px;
+        }
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(4rem, 15vw, 10rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #00f0ff, #4d7cff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+        p { color: #8888a0; font-size: 1rem; margin-bottom: 32px; letter-spacing: 1px; }
+        a {
+            display: inline-block;
+            padding: 12px 32px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            color: #0a0a0f;
+            background: linear-gradient(135deg, #00f0ff, #4d7cff);
+            text-decoration: none;
+            border-radius: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: box-shadow 0.3s;
+        }
+        a:hover { box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>404</h1>
+        <p>&gt; ERROR: Route not found in system_</p>
+        <a href="/">Return to Base</a>
+    </div>
+</body>
+</html>

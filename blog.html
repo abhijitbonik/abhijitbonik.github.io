@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Blog by Abhijit Bonik - Articles on Voice AI, Machine Learning, LLMs, RAG Architecture, MLOps, and Backend Engineering.">
+    <meta name="keywords" content="Abhijit Bonik blog, Voice AI, Machine Learning, LLM, RAG, MLOps, Python, Kafka, Backend Engineering">
+    <meta name="author" content="Abhijit Bonik">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="Blog | Abhijit Bonik">
+    <meta property="og:description" content="Articles on Voice AI, Machine Learning, LLMs, and Backend Engineering.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://abhijitbonik.github.io/blog.html">
+
+    <link rel="canonical" href="https://abhijitbonik.github.io/blog.html">
+
+    <title>Blog | Abhijit Bonik - Voice AI, ML & Backend Engineering</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#experience" class="nav-link">Experience</a></li>
+                <li><a href="index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="index.html#education" class="nav-link">Education</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Blog Hero -->
+    <div class="blog-hero">
+        <div class="container">
+            <span class="section-tag">&lt;blog&gt;</span>
+            <h1 class="section-title">Signal.broadcast</h1>
+            <p style="color: var(--text-secondary); margin-top: 12px; font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 1px;">
+                Thoughts on Voice AI, Machine Learning, and Engineering
+            </p>
+        </div>
+    </div>
+
+    <!-- Blog Content -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!-- Filter Buttons -->
+            <div class="blog-filters">
+                <button class="filter-btn active" data-filter="all">All Posts</button>
+                <button class="filter-btn" data-filter="daily">Daily</button>
+                <button class="filter-btn" data-filter="weekly">Weekly</button>
+                <button class="filter-btn" data-filter="monthly">Monthly</button>
+            </div>
+
+            <!-- Blog List -->
+            <div class="blog-list">
+
+                <!-- Post 1 -->
+                <article class="blog-list-item" data-frequency="daily" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Jan 30, 2025</span>
+                        <span class="blog-category">Voice AI</span>
+                        <span class="tech-tag" style="margin-left: auto;">Daily</span>
+                    </div>
+                    <h2 class="blog-list-title">Optimizing WebSocket Latency for Real-Time Voice Streams</h2>
+                    <p class="blog-list-excerpt">Today I tackled a latency bottleneck in our real-time voice pipeline. The key insight was batching audio frames at the transport layer while maintaining per-frame processing at the inference layer. Here's the approach and benchmarks...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">WebSocket</span>
+                        <span class="tech-tag">Audio Streaming</span>
+                        <span class="tech-tag">Latency</span>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="blog-list-item" data-frequency="weekly" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Jan 28, 2025</span>
+                        <span class="blog-category">Voice AI</span>
+                        <span class="tech-tag" style="margin-left: auto;">Weekly</span>
+                    </div>
+                    <h2 class="blog-list-title">Building Low-Latency Voice Pipelines for Real-Time AI Agents</h2>
+                    <p class="blog-list-excerpt">A deep dive into the architecture behind sub-200ms voice processing pipelines. Covers VAD integration, streaming ASR, LLM inference chains, and TTS synthesis in a real-time telephony context. Lessons from building production voice agents at Voicing AI...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">VAD</span>
+                        <span class="tech-tag">ASR</span>
+                        <span class="tech-tag">TTS</span>
+                        <span class="tech-tag">Telephony</span>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="blog-list-item" data-frequency="daily" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Jan 25, 2025</span>
+                        <span class="blog-category">LLM</span>
+                        <span class="tech-tag" style="margin-left: auto;">Daily</span>
+                    </div>
+                    <h2 class="blog-list-title">Debugging Hallucinations in RAG Pipelines: A Practical Checklist</h2>
+                    <p class="blog-list-excerpt">When your RAG system starts generating confident but wrong answers, where do you look? A quick checklist covering retrieval quality, chunk sizing, embedding drift, and prompt anchoring techniques...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">RAG</span>
+                        <span class="tech-tag">LLM</span>
+                        <span class="tech-tag">Debugging</span>
+                    </div>
+                </article>
+
+                <!-- Post 4 -->
+                <article class="blog-list-item" data-frequency="weekly" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Jan 20, 2025</span>
+                        <span class="blog-category">LLM</span>
+                        <span class="tech-tag" style="margin-left: auto;">Weekly</span>
+                    </div>
+                    <h2 class="blog-list-title">RAG vs Fine-Tuning: When to Use Which for Production LLMs</h2>
+                    <p class="blog-list-excerpt">A practical comparison drawn from real-world experience at Pixis and Voicing AI. When does retrieval augmentation win over fine-tuning? Cost analysis, accuracy trade-offs, and a decision framework for enterprise LLM deployments...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">RAG</span>
+                        <span class="tech-tag">Fine-Tuning</span>
+                        <span class="tech-tag">LLM</span>
+                        <span class="tech-tag">Production</span>
+                    </div>
+                </article>
+
+                <!-- Post 5 -->
+                <article class="blog-list-item" data-frequency="monthly" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Jan 15, 2025</span>
+                        <span class="blog-category">Architecture</span>
+                        <span class="tech-tag" style="margin-left: auto;">Monthly</span>
+                    </div>
+                    <h2 class="blog-list-title">Designing Scalable AI Telephony Systems: From Prototype to Production</h2>
+                    <p class="blog-list-excerpt">A comprehensive guide on architecting B2B AI telephony platforms. Covers SIP integration, media servers, voice pipeline orchestration, scaling strategies, and the engineering decisions that matter when handling thousands of concurrent voice AI sessions...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">Telephony</span>
+                        <span class="tech-tag">Architecture</span>
+                        <span class="tech-tag">Scaling</span>
+                        <span class="tech-tag">SIP</span>
+                    </div>
+                </article>
+
+                <!-- Post 6 -->
+                <article class="blog-list-item" data-frequency="daily" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Jan 10, 2025</span>
+                        <span class="blog-category">MLOps</span>
+                        <span class="tech-tag" style="margin-left: auto;">Daily</span>
+                    </div>
+                    <h2 class="blog-list-title">Quick Tip: Monitoring LLM Token Usage in Production</h2>
+                    <p class="blog-list-excerpt">A short note on instrumenting your LLM calls to track token consumption, latency percentiles, and cost per request. Using OpenTelemetry spans with custom attributes for ML inference observability...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">MLOps</span>
+                        <span class="tech-tag">Monitoring</span>
+                        <span class="tech-tag">OpenTelemetry</span>
+                    </div>
+                </article>
+
+                <!-- Post 7 -->
+                <article class="blog-list-item" data-frequency="weekly" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Jan 5, 2025</span>
+                        <span class="blog-category">Backend</span>
+                        <span class="tech-tag" style="margin-left: auto;">Weekly</span>
+                    </div>
+                    <h2 class="blog-list-title">LangGraph for Multi-Agent Orchestration: Patterns and Pitfalls</h2>
+                    <p class="blog-list-excerpt">Using LangGraph to build multi-agent systems that coordinate across voice, retrieval, and action-taking agents. Covers state management, conditional routing, human-in-the-loop patterns, and error recovery in production agent graphs...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">LangGraph</span>
+                        <span class="tech-tag">Multi-Agent</span>
+                        <span class="tech-tag">LangChain</span>
+                    </div>
+                </article>
+
+                <!-- Post 8 -->
+                <article class="blog-list-item" data-frequency="monthly" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Dec 20, 2024</span>
+                        <span class="blog-category">Infrastructure</span>
+                        <span class="tech-tag" style="margin-left: auto;">Monthly</span>
+                    </div>
+                    <h2 class="blog-list-title">Scaling Kafka for ML Inference Workloads: Lessons from Migration</h2>
+                    <p class="blog-list-excerpt">A detailed retrospective on migrating from Google Pub/Sub to Apache Kafka for high-throughput ML inference pipelines at FireCompass. Covers Dead Letter Queue implementation, consumer group tuning, exactly-once semantics, and the cost savings achieved...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">Kafka</span>
+                        <span class="tech-tag">Pub/Sub</span>
+                        <span class="tech-tag">ML Inference</span>
+                        <span class="tech-tag">DLQ</span>
+                    </div>
+                </article>
+
+                <!-- Post 9 -->
+                <article class="blog-list-item" data-frequency="monthly" style="transition: opacity 0.3s ease, transform 0.3s ease;">
+                    <div class="blog-list-meta">
+                        <span class="blog-date">Nov 15, 2024</span>
+                        <span class="blog-category">Computer Vision</span>
+                        <span class="tech-tag" style="margin-left: auto;">Monthly</span>
+                    </div>
+                    <h2 class="blog-list-title">Generative AI for Ad Creatives: Building a Production CV Pipeline</h2>
+                    <p class="blog-list-excerpt">How we built a generative AI platform at Pixis that creates ad creatives using computer vision. Covers the model architecture, training data curation, evaluation metrics, and the feedback loop that made the system progressively better...</p>
+                    <div class="blog-list-tags">
+                        <span class="tech-tag">Computer Vision</span>
+                        <span class="tech-tag">Generative AI</span>
+                        <span class="tech-tag">Ad Tech</span>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="no-posts">
+                <p>&gt; No posts found for this filter. Check back soon_</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    <span class="footer-bracket">[</span> Abhijit Bonik &copy; 2025 <span class="footer-bracket">]</span>
+                </p>
+                <p class="footer-sub">Designed with precision. Built for the future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

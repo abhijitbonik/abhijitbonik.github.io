@@ -1,7 +1,552 @@
----
-layout: home
-author_profile: true
-header:
-  image: /assets/images/coding.png
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Abhijit Bonik - Lead Machine Learning Engineer specializing in Realtime Voice AI, Conversational AI, LangChain, LangGraph, and B2B AI telephony. Based in Bangalore, India.">
+    <meta name="keywords" content="Abhijit Bonik, Machine Learning Engineer, Voice AI, Conversational AI, LangChain, LangGraph, MLOps, Python, Django, Generative AI, RAG, LLM">
+    <meta name="author" content="Abhijit Bonik">
+    <meta name="robots" content="index, follow">
 
----
+    <!-- Open Graph -->
+    <meta property="og:title" content="Abhijit Bonik | Lead ML Engineer - Voice AI & Conversational AI">
+    <meta property="og:description" content="Lead Machine Learning Engineer specializing in Realtime Voice AI, Live Voice Agents, and Conversational AI systems.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://abhijitbonik.github.io">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Abhijit Bonik | Lead ML Engineer">
+    <meta name="twitter:description" content="Lead Machine Learning Engineer specializing in Realtime Voice AI and Conversational AI.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://abhijitbonik.github.io">
+
+    <title>Abhijit Bonik | Lead ML Engineer - Realtime Voice AI & Conversational AI</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Abhijit Bonik",
+        "url": "https://abhijitbonik.github.io",
+        "email": "abhijitbonik@gmail.com",
+        "jobTitle": "Lead Machine Learning Engineer",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Voicing AI"
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Bangalore",
+            "addressRegion": "Karnataka",
+            "addressCountry": "IN"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/in/abhijitbonik"
+        ],
+        "knowsAbout": ["Machine Learning", "Voice AI", "Conversational AI", "LangChain", "LangGraph", "Python", "Django", "MLOps", "Generative AI"]
+    }
+    </script>
+</head>
+<body>
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Scan Line Overlay -->
+    <div class="scanline-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="blog.html" class="nav-link">Blog</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-content">
+            <div class="hero-glitch-wrapper">
+                <p class="hero-subtitle typewriter" data-text="> initializing_profile...">
+                    <span class="prompt">&gt;</span> initializing_profile<span class="blink">_</span>
+                </p>
+                <h1 class="hero-title glitch" data-text="ABHIJIT BONIK">ABHIJIT BONIK</h1>
+            </div>
+            <div class="hero-tagline">
+                <span class="tag">Realtime Voice AI</span>
+                <span class="tag-separator">|</span>
+                <span class="tag">Live Voice Agents</span>
+                <span class="tag-separator">|</span>
+                <span class="tag">Conversational AI</span>
+            </div>
+            <div class="hero-location">
+                <span class="location-icon">&#9678;</span> Bangalore, Karnataka, India
+            </div>
+            <div class="hero-cta">
+                <a href="#experience" class="btn btn-primary">
+                    <span class="btn-text">Explore Experience</span>
+                    <span class="btn-icon">&darr;</span>
+                </a>
+                <a href="#contact" class="btn btn-outline">
+                    <span class="btn-text">Get in Touch</span>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&lt;about&gt;</span>
+                <h2 class="section-title">System.profile</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-terminal">
+                    <div class="terminal-header">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                        <span class="terminal-title">abhijit@ml-engineer:~$</span>
+                    </div>
+                    <div class="terminal-body">
+                        <p class="terminal-line"><span class="terminal-prompt">$</span> cat summary.txt</p>
+                        <p class="terminal-output">At Voicing AI, my focus is on leveraging Generative AI to transform B2B AI telephony, enhancing customer interactions with AI-enabled voice solutions. We are streamlining communication processes with innovative AI audio telephony, building upon a strong foundation in MLOps and prompt engineering.</p>
+                        <p class="terminal-output">Previously at Pixis, the team and I developed a Generative AI platform for Ad Creative generation, utilizing Computer Vision and a RAG based LLM architecture. This experience, along with my proficiency in multiple programming languages, has been instrumental in my current role, driving advancements in AI voicing infrastructure.</p>
+                        <p class="terminal-line"><span class="terminal-prompt">$</span> <span class="blink">_</span></p>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="8">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="20">0</div>
+                        <div class="stat-label">Microservices Built</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="50">0</div>
+                        <div class="stat-label">Software Releases</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-label">Companies</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section section-dark" id="experience">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&lt;experience&gt;</span>
+                <h2 class="section-title">Career.timeline</h2>
+            </div>
+            <div class="timeline">
+                <!-- Voicing AI -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker">
+                        <div class="timeline-pulse"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header-bar">
+                            <span class="timeline-date">Jan 2025 &mdash; Present</span>
+                            <span class="timeline-badge active">CURRENT</span>
+                        </div>
+                        <h3 class="timeline-title">Lead Machine Learning Engineer</h3>
+                        <h4 class="timeline-company">Voicing AI <span class="timeline-location">// Bangalore</span></h4>
+                        <ul class="timeline-details">
+                            <li>Developing AI voicing infrastructure for B2B AI telephony at Voicing AI</li>
+                            <li>Building AI agents with telephony-based voice enablement for enhanced customer interactions</li>
+                            <li>Implementing low latency audio streaming pipelines</li>
+                            <li>Engineering voice activity detection systems</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tech-tag">Voice AI</span>
+                            <span class="tech-tag">LangChain</span>
+                            <span class="tech-tag">LangGraph</span>
+                            <span class="tech-tag">Telephony</span>
+                            <span class="tech-tag">MLOps</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pixis -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header-bar">
+                            <span class="timeline-date">Jan 2024 &mdash; Dec 2024</span>
+                            <span class="timeline-duration">1 year</span>
+                        </div>
+                        <h3 class="timeline-title">Senior Backend Developer - Machine Learning</h3>
+                        <h4 class="timeline-company">Pixis <span class="timeline-location">// Bangalore</span></h4>
+                        <p class="timeline-desc">Pixis develops codeless AI infrastructure to help brands scale all aspects of their marketing in a world of complex consumer behavior.</p>
+                        <ul class="timeline-details">
+                            <li>Built a Generative AI platform for generating Ad Creatives using Computer Vision and AI</li>
+                            <li>Architected a RAG-based LLM system for intelligent content generation</li>
+                            <li>Led model training and deployment pipelines for production ML systems</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tech-tag">Generative AI</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">LLM</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FireCompass -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header-bar">
+                            <span class="timeline-date">Oct 2021 &mdash; Jan 2024</span>
+                            <span class="timeline-duration">2 yrs 4 mos</span>
+                        </div>
+                        <h3 class="timeline-title">Software Engineer</h3>
+                        <h4 class="timeline-company">FireCompass <span class="timeline-location">// Bangalore</span></h4>
+                        <p class="timeline-desc">Spearheaded feature development and optimization across microservices in Python, Node, and Go, deployed across Google Cloud, Azure, and AWS.</p>
+                        <ul class="timeline-details">
+                            <li>Engineered customer-centric service performance enhancements, reducing memory and CPU process costs while ensuring seamless UX</li>
+                            <li>Implemented Kafka as a messaging service replacing Google Pubsub, lowering costs and enabling greater in-house control</li>
+                            <li>Integrated Dead Letter Queue functionality within Kafka, addressing failure issues in both Producer and Consumer ends</li>
+                            <li>Collaborated on over 20 micro-services and packages written in Python</li>
+                            <li>Oversaw more than 50 software releases with meticulous project management</li>
+                            <li>Mentored junior engineers, fostering growth while ensuring adherence to rigorous technical standards</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">Go</span>
+                            <span class="tech-tag">Kafka</span>
+                            <span class="tech-tag">GCP</span>
+                            <span class="tech-tag">Azure</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IIT Bombay - Project Software Engineer -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header-bar">
+                            <span class="timeline-date">Aug 2019 &mdash; Sep 2021</span>
+                            <span class="timeline-duration">2 yrs 2 mos</span>
+                        </div>
+                        <h3 class="timeline-title">Project Software Engineer</h3>
+                        <h4 class="timeline-company">Indian Institute of Technology, Bombay <span class="timeline-location">// Mumbai</span></h4>
+                        <p class="timeline-desc">Backend Developer for the Spoken Tutorial project.</p>
+                        <ul class="timeline-details">
+                            <li>Built Event Logs and Analytics System using ELK stack</li>
+                            <li>Wrote middlewares for capturing event logs with Logstash pipelines</li>
+                            <li>Optimized ORM queries and implemented caching with Memcached</li>
+                            <li>Created core modules and REST APIs for the platform</li>
+                            <li>Wrote asynchronous Celery tasks and cron jobs for bulk video conversion (ffmpeg) and bulk mail delivery</li>
+                            <li>Upgraded the entire system to the latest versions of Python and Django</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">ELK Stack</span>
+                            <span class="tech-tag">Memcached</span>
+                            <span class="tech-tag">Celery</span>
+                            <span class="tech-tag">FFmpeg</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IIT Bombay - Jr. Software Engineer -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header-bar">
+                            <span class="timeline-date">Aug 2017 &mdash; Jul 2019</span>
+                            <span class="timeline-duration">2 yrs</span>
+                        </div>
+                        <h3 class="timeline-title">Jr. Software Engineer</h3>
+                        <h4 class="timeline-company">Indian Institute of Technology, Bombay <span class="timeline-location">// Mumbai</span></h4>
+                        <p class="timeline-desc">Backend developer for the NVLI Project at IIT Bombay.</p>
+                        <ul class="timeline-details">
+                            <li>Created core modules for multiple Python and Django projects</li>
+                            <li>Designed and developed REST APIs using Django Rest Framework; integrated third-party APIs</li>
+                            <li>Developed a large Microservice Architecture based system with scalable deployment</li>
+                            <li>Code monitoring, Git branch management, Docker and Docker Compose configuration</li>
+                            <li>Worked with Apache Kafka and Elasticsearch for queuing and indexing event logs</li>
+                            <li>Supervised interns across different projects and sub-projects</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tech-tag">Django REST</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Kafka</span>
+                            <span class="tech-tag">Elasticsearch</span>
+                            <span class="tech-tag">Microservices</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IIT Bombay - Intern -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header-bar">
+                            <span class="timeline-date">Jan 2017 &mdash; Jun 2017</span>
+                            <span class="timeline-duration">6 mos</span>
+                        </div>
+                        <h3 class="timeline-title">Software Developer Intern (NVLI Project)</h3>
+                        <h4 class="timeline-company">Indian Institute of Technology, Bombay <span class="timeline-location">// Mumbai</span></h4>
+                        <ul class="timeline-details">
+                            <li>Created a Workflow and Revision module using Python</li>
+                            <li>Wrote specifications for multiple modules</li>
+                            <li>Integrated Solr search with a Drupal portal for generating search results</li>
+                        </ul>
+                        <div class="timeline-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Solr</span>
+                            <span class="tech-tag">Drupal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mirania Data Systems -->
+                <div class="timeline-item" data-aos="fade-up">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header-bar">
+                            <span class="timeline-date">Nov 2013 &mdash; Apr 2016</span>
+                            <span class="timeline-duration">2 yrs 6 mos</span>
+                        </div>
+                        <h3 class="timeline-title">Web Research Analyst</h3>
+                        <h4 class="timeline-company">Mirania Data Systems <span class="timeline-location">// Guwahati</span></h4>
+                        <ul class="timeline-details">
+                            <li>Conducted web research and data analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&lt;skills&gt;</span>
+                <h2 class="section-title">Tech.stack</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <span class="skill-icon">&#9881;</span> AI / ML
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><span class="skill-name">LangChain</span><div class="skill-bar"><div class="skill-fill" data-level="95"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">LangGraph</span><div class="skill-bar"><div class="skill-fill" data-level="90"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">RAG Architecture</span><div class="skill-bar"><div class="skill-fill" data-level="90"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Computer Vision</span><div class="skill-bar"><div class="skill-fill" data-level="85"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Voice AI / VAD</span><div class="skill-bar"><div class="skill-fill" data-level="92"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">PyTorch</span><div class="skill-bar"><div class="skill-fill" data-level="85"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">MLOps</span><div class="skill-bar"><div class="skill-fill" data-level="88"></div></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <span class="skill-icon">&#128187;</span> Backend
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><span class="skill-name">Python</span><div class="skill-bar"><div class="skill-fill" data-level="95"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Django / DRF</span><div class="skill-bar"><div class="skill-fill" data-level="92"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Node.js</span><div class="skill-bar"><div class="skill-fill" data-level="80"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Go</span><div class="skill-bar"><div class="skill-fill" data-level="75"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">REST APIs</span><div class="skill-bar"><div class="skill-fill" data-level="95"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Celery</span><div class="skill-bar"><div class="skill-fill" data-level="88"></div></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="skill-category-title">
+                        <span class="skill-icon">&#9729;</span> Cloud & Infra
+                    </h3>
+                    <div class="skill-items">
+                        <div class="skill-item"><span class="skill-name">Azure</span><div class="skill-bar"><div class="skill-fill" data-level="88"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">AWS</span><div class="skill-bar"><div class="skill-fill" data-level="82"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Google Cloud</span><div class="skill-bar"><div class="skill-fill" data-level="80"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Docker</span><div class="skill-bar"><div class="skill-fill" data-level="90"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Kafka</span><div class="skill-bar"><div class="skill-fill" data-level="88"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">ELK Stack</span><div class="skill-bar"><div class="skill-fill" data-level="85"></div></div></div>
+                        <div class="skill-item"><span class="skill-name">Elasticsearch</span><div class="skill-bar"><div class="skill-fill" data-level="85"></div></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section class="section section-dark" id="certifications">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&lt;certifications&gt;</span>
+                <h2 class="section-title">Credentials.verify</h2>
+            </div>
+            <div class="certs-grid">
+                <div class="cert-card" data-aos="fade-up">
+                    <div class="cert-icon">&#9733;</div>
+                    <h3 class="cert-title">Deep Learning Specialization</h3>
+                    <p class="cert-issuer">Coursera / deeplearning.ai</p>
+                </div>
+                <div class="cert-card" data-aos="fade-up">
+                    <div class="cert-icon">&#9733;</div>
+                    <h3 class="cert-title">Neural Networks and Deep Learning</h3>
+                    <p class="cert-issuer">Coursera / deeplearning.ai</p>
+                </div>
+                <div class="cert-card" data-aos="fade-up">
+                    <div class="cert-icon">&#9733;</div>
+                    <h3 class="cert-title">Deep Learning with Python and PyTorch</h3>
+                    <p class="cert-issuer">IBM (DL0110EN)</p>
+                </div>
+                <div class="cert-card" data-aos="fade-up">
+                    <div class="cert-icon">&#9733;</div>
+                    <h3 class="cert-title">Foundations: Data, Data, Everywhere</h3>
+                    <p class="cert-issuer">Google / Coursera</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&lt;education&gt;</span>
+                <h2 class="section-title">Academic.log</h2>
+            </div>
+            <div class="edu-card" data-aos="fade-up">
+                <div class="edu-icon">
+                    <span>&#127891;</span>
+                </div>
+                <div class="edu-content">
+                    <h3 class="edu-degree">Master of Computer Applications (MCA)</h3>
+                    <h4 class="edu-school">Cotton University</h4>
+                    <p class="edu-field">Computer Science</p>
+                    <span class="edu-year">2014 &mdash; 2017</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Preview Section -->
+    <section class="section section-dark" id="blog">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&lt;blog&gt;</span>
+                <h2 class="section-title">Recent.posts</h2>
+            </div>
+            <div class="blog-preview-grid">
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-card-header">
+                        <span class="blog-date">Jan 28, 2025</span>
+                        <span class="blog-category">Voice AI</span>
+                    </div>
+                    <h3 class="blog-card-title">Building Low-Latency Voice Pipelines for Real-Time AI Agents</h3>
+                    <p class="blog-card-excerpt">Exploring the architecture behind sub-200ms voice processing pipelines and the challenges of real-time telephony AI systems...</p>
+                    <a href="blog.html" class="blog-read-more">Read More &rarr;</a>
+                </article>
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-card-header">
+                        <span class="blog-date">Jan 15, 2025</span>
+                        <span class="blog-category">LLM</span>
+                    </div>
+                    <h3 class="blog-card-title">RAG vs Fine-Tuning: When to Use Which for Production LLMs</h3>
+                    <p class="blog-card-excerpt">A practical comparison of Retrieval Augmented Generation and fine-tuning approaches for enterprise LLM deployments...</p>
+                    <a href="blog.html" class="blog-read-more">Read More &rarr;</a>
+                </article>
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-card-header">
+                        <span class="blog-date">Dec 20, 2024</span>
+                        <span class="blog-category">MLOps</span>
+                    </div>
+                    <h3 class="blog-card-title">Scaling Kafka for ML Inference Workloads</h3>
+                    <p class="blog-card-excerpt">Lessons learned from migrating from Google Pub/Sub to Kafka for high-throughput ML inference pipelines...</p>
+                    <a href="blog.html" class="blog-read-more">Read More &rarr;</a>
+                </article>
+            </div>
+            <div class="blog-cta">
+                <a href="blog.html" class="btn btn-primary">
+                    <span class="btn-text">View All Posts</span>
+                    <span class="btn-icon">&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">&lt;contact&gt;</span>
+                <h2 class="section-title">Init.connection</h2>
+            </div>
+            <div class="contact-grid">
+                <a href="mailto:abhijitbonik@gmail.com" class="contact-card" data-aos="fade-up">
+                    <div class="contact-icon">&#9993;</div>
+                    <h3>Email</h3>
+                    <p>abhijitbonik@gmail.com</p>
+                </a>
+                <a href="https://www.linkedin.com/in/abhijitbonik" target="_blank" rel="noopener noreferrer" class="contact-card" data-aos="fade-up">
+                    <div class="contact-icon">&#128279;</div>
+                    <h3>LinkedIn</h3>
+                    <p>linkedin.com/in/abhijitbonik</p>
+                </a>
+                <a href="https://abhijitbonik.github.io" class="contact-card" data-aos="fade-up">
+                    <div class="contact-icon">&#127760;</div>
+                    <h3>Website</h3>
+                    <p>abhijitbonik.github.io</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    <span class="footer-bracket">[</span> Abhijit Bonik &copy; 2025 <span class="footer-bracket">]</span>
+                </p>
+                <p class="footer-sub">Designed with precision. Built for the future.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
