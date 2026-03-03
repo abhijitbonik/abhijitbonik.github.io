@@ -337,6 +337,58 @@ def build_post_page(post: dict, content_html: str,
     print(f"  ✓  {out_path.relative_to(REPO_ROOT)}")
 
 
+# ── Homepage preview ──────────────────────────────────────────────────────────
+
+def update_homepage_preview(posts: list) -> None:
+    """Inject the 3 most recent posts into index.html between marker comments."""
+    homepage = REPO_ROOT / "index.html"
+    if not homepage.exists():
+        print("  ⚠  index.html not found, skipping homepage preview update.")
+        return
+
+    content = homepage.read_text(encoding="utf-8")
+    start_marker = "<!-- BLOG_PREVIEW_START -->"
+    end_marker   = "<!-- BLOG_PREVIEW_END -->"
+
+    start_idx = content.find(start_marker)
+    end_idx   = content.find(end_marker)
+    if start_idx == -1 or end_idx == -1:
+        print("  ⚠  BLOG_PREVIEW markers not found in index.html, skipping.")
+        return
+
+    recent = posts[:3]
+    cards  = ""
+    for post in recent:
+        date_disp = format_date(post.get("date", ""))
+        cat       = post.get("category", "")
+        excerpt   = post.get("excerpt", "")
+
+        cat_span    = f'<span class="blog-category">{esc(cat)}</span>' if cat else ""
+        date_span   = f'<span class="blog-date">{esc(date_disp)}</span>' if date_disp else ""
+        excerpt_p   = f'\n                    <p class="blog-card-excerpt">{esc(excerpt)}</p>' if excerpt else ""
+
+        cards += f"""
+                <article class="blog-card" data-aos="fade-up">
+                    <div class="blog-card-header">
+                        {date_span}
+                        {cat_span}
+                    </div>
+                    <h3 class="blog-card-title">{esc(post['title'])}</h3>{excerpt_p}
+                    <a href="blog/{post['slug']}/index.html" class="blog-read-more">Read More &rarr;</a>
+                </article>"""
+
+    grid = f'            <div class="blog-preview-grid">{cards}\n            </div>'
+    new_block = f"{start_marker}\n{grid}\n            {end_marker}"
+
+    new_content = (
+        content[:start_idx]
+        + new_block
+        + content[end_idx + len(end_marker):]
+    )
+    homepage.write_text(new_content, encoding="utf-8")
+    print(f"  ✓  index.html — recent posts updated ({len(recent)} cards)")
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def build() -> None:
@@ -401,6 +453,9 @@ def build() -> None:
 
     # Generate blog index
     build_blog_index(posts, categories, BLOG_DIR / "index.html")
+
+    # Update homepage recent posts preview
+    update_homepage_preview(posts)
 
     print(f"\nDone — {len(posts)} posts built.")
 
