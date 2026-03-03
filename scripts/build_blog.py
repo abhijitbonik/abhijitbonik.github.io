@@ -130,6 +130,7 @@ def html_head(title: str, root: str, description: str = "") -> str:
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <link rel="stylesheet" href="{root}assets/css/style.css">
+    <script>(function(){{var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t||'dark');}})();</script>
 </head>"""
 
 
@@ -156,6 +157,9 @@ def html_nav(root: str, active: str = "") -> str:
                 {a(root + "readings/index.html",       "Readings", "readings")}
                 {a(root + "index.html#contact",        "Contact")}
             </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span id="theme-icon">☀</span>
+            </button>
         </div>
     </nav>"""
 

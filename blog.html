@@ -21,6 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <script>(function(){var t=localStorage.getItem('theme');document.documentElement.setAttribute('data-theme',t||'dark');})();</script>
 </head>
 <body>
     <canvas id="particle-canvas"></canvas>
@@ -45,6 +46,9 @@
                 <li><a href="readings/index.html" class="nav-link">Readings</a></li>
                 <li><a href="index.html#contact" class="nav-link">Contact</a></li>
             </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode">
+                <span id="theme-icon">☀</span>
+            </button>
         </div>
     </nav>
 

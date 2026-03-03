@@ -5,6 +5,113 @@
 (function () {
     'use strict';
 
+    // ---- Theme Toggle ----
+    const html        = document.documentElement;
+    const toggleBtn   = document.getElementById('theme-toggle');
+    const toggleIcon  = document.getElementById('theme-icon');
+
+    // ---- Morning Scene ----
+    var morningScene = null;
+
+    function buildMorningScene() {
+        if (morningScene) return;
+        var scene = document.createElement('div');
+        scene.id = 'morning-scene';
+
+        // Sky
+        var sky = document.createElement('div');
+        sky.className = 'morning-sky';
+        scene.appendChild(sky);
+
+        // Hills
+        var hills = document.createElement('div');
+        hills.className = 'morning-hills';
+        scene.appendChild(hills);
+
+        // Clouds
+        var cloudData = [
+            { w: 180, h: 36, top: '12%', color: 'rgba(255,252,245,0.82)', dur: 52, delay: 0   },
+            { w: 130, h: 28, top: '22%', color: 'rgba(255,245,230,0.70)', dur: 68, delay: -18  },
+            { w: 210, h: 42, top: '8%',  color: 'rgba(255,248,238,0.75)', dur: 44, delay: -30  },
+            { w:  90, h: 22, top: '30%', color: 'rgba(255,240,220,0.65)', dur: 76, delay: -10  },
+        ];
+        cloudData.forEach(function (d) {
+            var c = document.createElement('div');
+            c.className = 'morning-cloud';
+            c.style.cssText = [
+                'width:'  + d.w + 'px',
+                'height:' + d.h + 'px',
+                'top:'    + d.top,
+                'left:-'  + (d.w + 20) + 'px',
+                'background:' + d.color,
+                'animation-duration:'+ d.dur +'s',
+                'animation-delay:'   + d.delay + 's',
+            ].join(';');
+            scene.appendChild(c);
+        });
+
+        // Birds
+        var birdData = [
+            { top: '18%', dur: 28, delay: 0   },
+            { top: '14%', dur: 36, delay: -8  },
+            { top: '22%', dur: 32, delay: -16 },
+            { top: '16%', dur: 42, delay: -24 },
+        ];
+        birdData.forEach(function (d) {
+            var b = document.createElement('div');
+            b.className = 'morning-bird';
+            b.style.cssText = [
+                'top:'   + d.top,
+                'left:-60px',
+                'animation-duration:'+ d.dur +'s',
+                'animation-delay:'   + d.delay + 's',
+            ].join(';');
+            var wl = document.createElement('span');
+            wl.className = 'b-wing-l';
+            var wr = document.createElement('span');
+            wr.className = 'b-wing-r';
+            // match wing animation duration to bird flight
+            var wDur = (d.dur * 0.06).toFixed(1);
+            wl.style.animationDuration = wDur + 's';
+            wr.style.animationDuration = wDur + 's';
+            b.appendChild(wl);
+            b.appendChild(wr);
+            scene.appendChild(b);
+        });
+
+        document.body.insertBefore(scene, document.body.firstChild);
+        morningScene = scene;
+    }
+
+    function applyTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        if (toggleIcon) {
+            toggleIcon.textContent = theme === 'dark' ? '☀' : '☽';
+            toggleBtn.setAttribute('aria-label',
+                theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        }
+        if (theme === 'light') {
+            buildMorningScene();
+            // Small delay so the fade-in transition plays
+            setTimeout(function () {
+                if (morningScene) morningScene.classList.add('ms-visible');
+            }, 20);
+        } else {
+            if (morningScene) morningScene.classList.remove('ms-visible');
+        }
+    }
+
+    // Respect saved preference (anti-flash script in <head> already set the attribute)
+    applyTheme(html.getAttribute('data-theme') || 'dark');
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function () {
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', next);
+            applyTheme(next);
+        });
+    }
+
     // ---- Particle Canvas ----
     const canvas = document.getElementById('particle-canvas');
     if (canvas) {
