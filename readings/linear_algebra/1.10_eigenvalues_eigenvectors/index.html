@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.10 — Eigenvalues &amp; Eigenvectors — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.10 — Eigenvalues &amp; Eigenvectors | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.10 — Eigenvalues &amp; Eigenvectors
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.10 — Eigenvalues &amp; Eigenvectors</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.10 — Eigenvalues &amp; Eigenvectors</h1>
+<p><strong>Date:</strong> 2026-03-02 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>Apply a matrix to a random vector and it gets knocked off in a new direction — rotated, stretched, completely changed. But for every matrix, there exist a handful of special vectors that only get <em>scaled</em> — they don't rotate at all. They stay on the same line through the origin, just longer or shorter. These are eigenvectors. The scaling factor is the eigenvalue.</p>
+<h2>The intuition</h2>
+<p>Imagine you're looking at a transformation that stretches space horizontally and vertically. Most arrows get knocked into new directions. But an arrow pointing purely horizontally just gets longer horizontally — same direction, bigger. An arrow pointing purely vertically just gets longer vertically. These "axis-aligned" arrows are the eigenvectors.</p>
+<p>"Eigen" is German for "own" — these are the transformation's <em>own</em> special directions. Every transformation has them (though finding them takes work).</p>
+<pre><code>Most vectors:             Eigenvectors:
+              Av                       λv (scaled, same direction)
+             ↗                        ↗
+v ─────────→            v ─────────→
+      rotated                not rotated!
+</code></pre>
+<h2>The math</h2>
+<p><strong>Definition:</strong></p>
+<pre><code>A · v = λ · v
+</code></pre>
+<p>v = eigenvector (non-zero), λ = eigenvalue (a scalar).</p>
+<p><strong>How to find eigenvalues</strong> — rearrange to get:</p>
+<pre><code>(A − λI)·v = 0
+</code></pre>
+<p>For a non-zero solution to exist, <code>(A − λI)</code> must be singular:</p>
+<pre><code>det(A − λI) = 0     ← the characteristic equation
+</code></pre>
+<p>Solve this polynomial equation for λ.</p>
+<p><strong>How to find eigenvectors</strong> — once you have λ, solve <code>(A − λI)·v = 0</code> — find the null space of <code>(A − λI)</code>.</p>
+<p><strong>Two elegant properties:</strong></p>
+<pre><code>det(A) = λ₁ · λ₂ · ... · λₙ    (product of all eigenvalues)
+trace(A) = λ₁ + λ₂ + ... + λₙ  (sum of diagonal = sum of eigenvalues)
+</code></pre>
+<p>Quick sanity checks when you've found eigenvalues.</p>
+<h2>A worked example</h2>
+<pre><code>A = [ 2  1 ]
+    [ 0  3 ]
+</code></pre>
+<p><strong>Step 1 — characteristic equation:</strong></p>
+<pre><code>det(A − λI) = (2−λ)(3−λ) − 1·0 = (2−λ)(3−λ) = 0
+→  λ₁ = 2,   λ₂ = 3
+</code></pre>
+<p><strong>Step 2 — eigenvectors:</strong>
+For λ₁=2: solve <code>(A−2I)v = [[0,1],[0,1]]v = 0</code> → v₂=0, v₁ free → <strong>v₁ = [1, 0]</strong>
+For λ₂=3: solve <code>(A−3I)v = [[-1,1],[0,0]]v = 0</code> → v₁=v₂ → <strong>v₂ = [1, 1]</strong></p>
+<p>Check: <code>A·[1,0] = [2,0] = 2·[1,0]</code> ✓ and <code>A·[1,1] = [3,3] = 3·[1,1]</code> ✓</p>
+<p>What the eigenvalue value tells you:
+- λ &gt; 1: stretched (gets bigger)
+- λ = 1: unchanged
+- 0 &lt; λ &lt; 1: shrunk
+- λ = 0: collapses to zero → matrix is singular!
+- λ &lt; 0: flipped direction + scaled</p>
+<h2>Why this matters for ML</h2>
+<p><strong>PCA:</strong> the principal components are the eigenvectors of the data's covariance matrix. The eigenvalues tell you how much variance lies in each direction. Large eigenvalue = important direction. Near-zero eigenvalue = noise.</p>
+<p><strong>Vanishing/exploding gradients in RNNs:</strong> apply the same weight matrix W at every time step. After t steps: <code>hₜ = Wᵗ·h₀</code>. Decompose in the eigenvector basis: each component gets multiplied by λᵢᵗ. If |λ| &gt; 1, that component <em>explodes</em> over time. If |λ| &lt; 1, it <em>vanishes</em>. The eigenvalues of W determine whether an RNN can remember long-range dependencies. This is the root cause of the vanishing gradient problem.</p>
+<p><strong>PageRank:</strong> Google ranks web pages by finding the dominant eigenvector of the page-link matrix — the eigenvector with the largest eigenvalue. Each page's importance is its component in that special direction.</p>
+<h2>The one thing to remember</h2>
+<p>Eigenvectors are special directions that only get scaled (not rotated) by the transformation. The eigenvalue is the scaling factor. They reveal the transformation's natural coordinate system.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.9_projections_orthogonality/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.9 — Projections and Orthogonality</span>
+                    </a>
+                <a href="../1.11_eigendecomposition_diagonalization/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.11 — Eigendecomposition &amp; Diagonalization</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

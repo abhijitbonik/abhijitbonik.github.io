@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.11 — Eigendecomposition &amp; Diagonalization — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.11 — Eigendecomposition &amp; Diagonalization | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.11 — Eigendecomposition &amp; Diagonalization
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.11 — Eigendecomposition &amp; Diagonalization</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.11 — Eigendecomposition &amp; Diagonalization</h1>
+<p><strong>Date:</strong> 2026-03-02 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>If a matrix has enough eigenvectors, you can completely rewrite it in terms of those eigenvectors and eigenvalues. This reveals that even a complicated-looking matrix is doing something surprisingly simple: just scaling each eigenvector direction independently.</p>
+<h2>The intuition</h2>
+<p>From Topic 1.10: a matrix A has eigenvectors v₁, v₂, ... and eigenvalues λ₁, λ₂, ... </p>
+<p>Now here's the insight: <strong>in the eigenvector coordinate system, the matrix is trivially simple</strong> — it just multiplies each axis by its eigenvalue. All the complexity comes from the change of coordinates.</p>
+<p>Think of it like this: a complicated 2D transformation looks messy in x-y coordinates. But if you rotate your coordinate axes to align with the eigenvectors, suddenly the transformation is just "scale the first axis by λ₁, scale the second by λ₂." Simple independent scaling.</p>
+<p>Eigendecomposition literally writes the matrix as: "change to eigenvector coordinates → do simple scaling → change back."</p>
+<pre><code>A = V · Λ · V⁻¹
+
+V⁻¹: rotate into eigenvector world
+Λ:   scale independently along each axis (trivially simple — it's diagonal)
+V:   rotate back to standard world
+</code></pre>
+<h2>The math</h2>
+<p><strong>The decomposition:</strong></p>
+<pre><code>A = V · Λ · V⁻¹
+</code></pre>
+<p>Where:
+- V = matrix with eigenvectors as columns: <code>[v₁ | v₂ | ... | vₙ]</code>
+- Λ = diagonal matrix of eigenvalues: <code>diag(λ₁, λ₂, ..., λₙ)</code></p>
+<p><strong>Derivation:</strong> write out A·V column by column:</p>
+<pre><code>A·V = [Av₁|Av₂|...|Avₙ] = [λ₁v₁|λ₂v₂|...|λₙvₙ] = V·Λ
+→ A = V·Λ·V⁻¹   (multiply both sides by V⁻¹ on the right)
+</code></pre>
+<p><strong>For symmetric matrices</strong> (like covariance matrices), eigenvectors are orthogonal, so V⁻¹ = Vᵀ:</p>
+<pre><code>A = Q · Λ · Qᵀ     ← cleaner, more stable, no explicit inverse needed
+</code></pre>
+<p><strong>Rank-1 expansion</strong> (another way to write it):</p>
+<pre><code>A = λ₁·v₁v₁ᵀ + λ₂·v₂v₂ᵀ + ... + λₙ·vₙvₙᵀ
+</code></pre>
+<p>A is a weighted sum of projections onto each eigenvector. Large λ = important direction.</p>
+<h2>A worked example — matrix powers</h2>
+<p>The real payoff: <code>A^k = V·Λ^k·V⁻¹</code>, and raising a diagonal matrix to a power is trivial:</p>
+<pre><code>Λ^k = diag(λ₁^k, λ₂^k, ..., λₙ^k)
+</code></pre>
+<p>For A with eigenvalues λ₁=2, λ₂=0.5:
+- <code>A^10</code> in the first eigenvector direction: <code>2^10 = 1024</code> — massively amplified
+- <code>A^10</code> in the second eigenvector direction: <code>0.5^10 ≈ 0.001</code> — completely vanished</p>
+<p>This happens without doing 10 matrix multiplications — just three (V, Λ^k, V⁻¹).</p>
+<h2>Why this matters for ML</h2>
+<p><strong>RNN long-term dependencies:</strong> after t time steps, <code>hₜ = Wᵗ·h₀ = V·Λᵗ·V⁻¹·h₀</code>. The eigenvalues of W determine what happens to information over time. Components along eigenvectors with |λ|&gt;1 explode; with |λ|&lt;1 vanish. The network can only remember the directions with |λ|≈1. This is the <em>mathematical</em> root of why vanilla RNNs fail at long sequences, and why LSTMs were invented to control these eigenvalues.</p>
+<p><strong>PCA:</strong> the covariance matrix <code>C = QΛQᵀ</code>. The eigendecomposition directly gives you the principal components (columns of Q) and the variance in each direction (diagonal of Λ). Drop the small eigenvalue directions → dimensionality reduction.</p>
+<p><strong>Spectral methods in Graph Neural Networks:</strong> the eigendecomposition of the graph Laplacian defines the "frequencies" of the graph. Spectral GNNs convolve in this eigenvector basis — exactly the same idea as Fourier transforms but on graph structure.</p>
+<h2>The one thing to remember</h2>
+<p><code>A = VΛV⁻¹</code> says: every transformation is just scaling along its natural axes (the eigenvectors), wrapped in a change of coordinates. Eigendecomposition makes matrix powers and long-run behavior trivial to compute.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.10_eigenvalues_eigenvectors/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.10 — Eigenvalues &amp; Eigenvectors</span>
+                    </a>
+                <a href="../1.12_svd/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.12 — Singular Value Decomposition (SVD)</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

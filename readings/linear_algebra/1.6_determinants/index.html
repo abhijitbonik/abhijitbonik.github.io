@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.6 — Determinants: Geometric Meaning — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.6 — Determinants: Geometric Meaning | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.6 — Determinants: Geometric Meaning
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.6 — Determinants: Geometric Meaning</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.6 — Determinants: Geometric Meaning</h1>
+<p><strong>Date:</strong> 2026-03-01 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>The determinant is a single number that answers: "by what factor does this transformation scale area?" If you put a 1×1 square through the transformation, the determinant tells you the area of the resulting shape. It also tells you whether the transformation flips space over.</p>
+<h2>The intuition</h2>
+<p>Take a unit square — a 1×1 square sitting at the origin. Apply a matrix transformation to it. The square becomes a parallelogram (it gets squished and stretched). The area of that parallelogram is <code>|det(A)|</code>.</p>
+<pre><code>Before:         After (det=6):        After (det=0):
+*────*           *──────────*          * (just a point or line)
+|    |    →      /          /    →
+*────*          *──────────*
+area = 1         area = 6              area = 0
+</code></pre>
+<p>The sign of the determinant tells you about orientation:
+- Positive: space kept its "handedness" (like a normal scaling or rotation)
+- Negative: space got flipped (like a reflection — a clock would run backwards)
+- Zero: space got completely squashed to a lower dimension — information was lost</p>
+<h2>The math</h2>
+<p><strong>For a 2×2 matrix:</strong></p>
+<pre><code>A = [ a  b ]
+    [ c  d ]
+
+det(A) = ad − bc
+</code></pre>
+<p>This formula computes the signed area of the parallelogram formed by the two column vectors.</p>
+<p><strong>Three key properties:</strong></p>
+<pre><code>det(A·B) = det(A) · det(B)    ← composing transforms multiplies scale factors
+det(I)   = 1                  ← identity does nothing, scales by 1
+det(A⁻¹) = 1 / det(A)        ← inverse undoes the scaling
+</code></pre>
+<h2>A worked example</h2>
+<pre><code>A = [ 3  0 ]   det = 3·2 − 0·0 = 6
+    [ 0  2 ]
+</code></pre>
+<p>This matrix stretches 3× horizontally and 2× vertically. Area scales by 3×2 = 6. ✓</p>
+<pre><code>A = [ 1  2 ]   det = 1·4 − 2·2 = 0
+    [ 2  4 ]
+</code></pre>
+<p>From Topic 1.5, this matrix is rank 1 — it squashes the plane to a line. A line has zero area. det = 0. ✓</p>
+<h2>The grand unification (det = 0)</h2>
+<p>All of these say exactly the same thing — if you know one, you know all:</p>
+<pre><code>det(A) = 0
+  ⟺  matrix is not invertible (singular)
+  ⟺  rank &lt; n
+  ⟺  null space is non-trivial
+  ⟺  columns are linearly dependent
+  ⟺  transformation squashes to lower dimension
+</code></pre>
+<h2>Why this matters for ML</h2>
+<p><strong>Invertibility check:</strong> to solve linear regression analytically, you need to invert <code>XᵀX</code>. If det(XᵀX) = 0, it's singular and can't be inverted — your features are linearly dependent (multicollinear).</p>
+<p><strong>Normalising flows</strong> are generative models that transform simple distributions (like Gaussians) into complex ones. At each step, the probability density changes by <code>1/|det(Jacobian)|</code>. The determinant tracks how probability mass spreads or concentrates — this is the entire mathematical foundation of flow-based models.</p>
+<p><strong>Rotations always have det = 1</strong> — they preserve area perfectly. This is why rotation matrices are special in ML: they transform data without distorting distances.</p>
+<h2>The one thing to remember</h2>
+<p>det(A) = how much the transformation scales area. Zero means space collapsed — information was destroyed.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.5_rank_null_space_column_space/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.5 — Rank, Column Space &amp; Null Space</span>
+                    </a>
+                <a href="../1.7_inverse_matrices/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.7 — Inverse Matrices and When They Exist</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

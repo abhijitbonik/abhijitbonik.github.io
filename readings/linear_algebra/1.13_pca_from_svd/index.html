@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.13 — PCA Derived from SVD — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.13 — PCA Derived from SVD | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.13 — PCA Derived from SVD
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.13 — PCA Derived from SVD</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.13 — PCA Derived from SVD</h1>
+<p><strong>Date:</strong> 2026-03-02 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>PCA (Principal Component Analysis) finds the most important directions of variation in your data, and lets you project the data onto those directions to reduce its dimensionality. It answers: "If I can only keep k directions, which k directions preserve the most information?" It is derived from the geometry of projections and the algebra of SVD.</p>
+<h2>The intuition</h2>
+<p>Imagine a cloud of data points in 2D — they form an elongated ellipse:</p>
+<pre><code>        *  *
+      *  *  *
+    *  *  *  *      ← data cloud (elongated)
+      *  *  *
+        *  *
+</code></pre>
+<p>The cloud is longer in one direction than another. PCA finds that long axis (the direction of most spread/variance) and calls it the first principal component. The perpendicular direction is the second component.</p>
+<p>If you project all points onto just the first component, you've gone from 2D to 1D — losing minimal information, because the dropped direction (perpendicular) has little variance. You've compressed the data.</p>
+<p>In high dimensions (hundreds of features), the same idea applies: find the few directions that capture most of the variation, project onto them, ignore the rest.</p>
+<h2>The math — derived from first principles</h2>
+<p><strong>Setup:</strong> data matrix X is (n×p) — n samples, p features.</p>
+<p><strong>Step 1 — centre the data.</strong> Subtract the mean of each column:</p>
+<pre><code>X̃ = X − mean(X, axis=0)
+</code></pre>
+<p>This makes every feature have mean 0. PCA finds directions of <em>spread</em>, not of <em>location</em>, so centering is essential.</p>
+<p><strong>Step 2 — formulate the problem.</strong> Find a unit vector w that maximises the variance of the projected data:</p>
+<pre><code>Var(X̃w) = (1/n)‖X̃w‖² = wᵀCw     where C = (1/n)X̃ᵀX̃  (covariance matrix)
+
+Maximise wᵀCw  subject to  ‖w‖² = 1
+</code></pre>
+<p><strong>Step 3 — solve with Lagrange multipliers</strong> (constrained optimisation — fully covered in Block 2):</p>
+<pre><code>∂/∂w [wᵀCw − λ(wᵀw − 1)] = 0
+→  Cw = λw
+</code></pre>
+<p>The optimal direction w must be an <em>eigenvector</em> of C. The variance achieved equals the eigenvalue λ. To maximise variance → take the eigenvector with the largest eigenvalue.</p>
+<p><strong>Step 4 — get all components at once via SVD.</strong>
+Instead of computing C and its eigendecomposition, take SVD of X̃ directly:</p>
+<pre><code>X̃ = U · Σ · Vᵀ
+
+→  C = (1/n)X̃ᵀX̃ = V·(Σ²/n)·Vᵀ
+</code></pre>
+<p>Reading off: the columns of V are the principal components. The variance along component i is σᵢ²/n.</p>
+<p><strong>Step 5 — project to k dimensions.</strong> Take the first k columns of V:</p>
+<pre><code>Vₖ = [v₁ | v₂ | ... | vₖ]     (p×k)
+
+Z = X̃ · Vₖ                     (n×k) ← your compressed data
+</code></pre>
+<p>To approximately reconstruct: <code>X̃_approx = Z · Vₖᵀ</code> — a projection (Topic 1.9) onto the principal subspace.</p>
+<h2>Choosing k — how many components?</h2>
+<pre><code>Variance explained by component i = σᵢ² / (σ₁² + σ₂² + ... + σₚ²)
+</code></pre>
+<p>Plot these in order (scree plot). Choose k at the "elbow," or where cumulative variance hits 95%.</p>
+<h2>Why this matters for ML</h2>
+<p><strong>Dimensionality reduction:</strong> 1000 features → 20 principal components capturing 95% of variance. This speeds up any downstream model, reduces overfitting, and removes noise.</p>
+<p><strong>Visualisation:</strong> project your high-dimensional data to 2 or 3 PCA dimensions and you can <em>see</em> it. Clusters, outliers, and structure become visible. Before training any model on a new dataset, PCA visualisation should be your first step.</p>
+<p><strong>Noise removal:</strong> the small singular values capture noise (random fluctuations with no pattern). Discarding them and reconstructing from the top components gives a denoised version of the data.</p>
+<p><strong>Connection to everything in Block 1:</strong> every topic contributed to this derivation — vectors are data points, span and independence explain what PCA is doing, matrices transform the data, rank is the intrinsic dimension, projections are the core operation, eigenvalues measure variance, eigendecomposition gives all components, and SVD provides the clean practical algorithm.</p>
+<h2>The complete algorithm in 4 steps</h2>
+<pre><code>1. X̃ = X − mean(X, axis=0)       ← centre
+2. X̃ = U·Σ·Vᵀ                   ← SVD
+3. Vₖ = first k columns of V      ← pick components
+4. Z = X̃·Vₖ                      ← project (compress)
+</code></pre>
+<h2>The one thing to remember</h2>
+<p>PCA finds the directions of maximum variance. Via SVD, these are the right singular vectors of the centred data matrix. Project onto the top k of them → best possible k-dimensional compression of your data.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.12_svd/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.12 — Singular Value Decomposition (SVD)</span>
+                    </a>
+                
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

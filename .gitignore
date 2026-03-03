@@ -1,5 +1,27 @@
-_site
-.sass-cache
-.jekyll-cache
-.jekyll-metadata
-vendor
+# ── OS ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+
+# ── Python ────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# ── Node (if ever added) ──────────────────────────────
+node_modules/
+
+# ── Editor / IDE ──────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ── Jekyll leftovers (not in use) ────────────────────
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata/
+vendor/

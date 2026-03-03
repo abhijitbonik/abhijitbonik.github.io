@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.4 — Matrix Multiplication: Composition of Transformations — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.4 — Matrix Multiplication: Composition of Transformations | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.4 — Matrix Multiplication: Composition of Transformations
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.4 — Matrix Multiplication: Composition of Transformations</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.4 — Matrix Multiplication: Composition of Transformations</h1>
+<p><strong>Date:</strong> 2026-02-27 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>Multiplying two matrices produces a new matrix that represents applying both transformations one after the other. It's not element-wise multiplication — it's function composition. <code>A·B</code> means "first do B, then do A."</p>
+<h2>The intuition</h2>
+<p>If matrix B rotates space 90°, and matrix A scales everything by 2, then <code>A·B</code> is the single transformation that does both: rotate first, then scale. The result is a brand new matrix that "remembers" both operations baked in.</p>
+<p>Think of it like combining two instructions into one. Instead of saying "first turn left, then go forward," you combine them into "take this diagonal path."</p>
+<p><strong>Why does order matter?</strong> Because "rotate then scale" is geometrically different from "scale then rotate" — just like "put on shoes then socks" differs from "put on socks then shoes."</p>
+<h2>The math</h2>
+<p><strong>How to compute A·B:</strong>
+Each entry <code>Cᵢⱼ</code> of the result = dot product of row i of A with column j of B.</p>
+<pre><code>A = [ a  b ]    B = [ e  f ]
+    [ c  d ]        [ g  h ]
+
+A·B = [ a·e + b·g    a·f + b·h ]
+      [ c·e + d·g    c·f + d·h ]
+</code></pre>
+<p><strong>Dimension rule:</strong> <code>(m×n) · (n×p) = (m×p)</code> — the inner dimensions must match.</p>
+<p><strong>Key properties:</strong>
+- NOT commutative: <code>AB ≠ BA</code> in general (order matters!)
+- Associative: <code>(AB)C = A(BC)</code> (grouping doesn't matter)
+- Identity: <code>A·I = I·A = A</code> (identity matrix does nothing)</p>
+<h2>A worked example</h2>
+<pre><code>A = [ 1  2 ]    B = [ 5  6 ]
+    [ 3  4 ]        [ 7  8 ]
+</code></pre>
+<p>Top-left: row 1 of A · col 1 of B = [1,2]·[5,7] = 1·5 + 2·7 = 19
+Top-right: row 1 of A · col 2 of B = [1,2]·[6,8] = 1·6 + 2·8 = 22
+Bottom-left: row 2 of A · col 1 of B = [3,4]·[5,7] = 3·5 + 4·7 = 43
+Bottom-right: row 2 of A · col 2 of B = [3,4]·[6,8] = 3·6 + 4·8 = 50</p>
+<pre><code>A·B = [ 19  22 ]
+      [ 43  50 ]
+</code></pre>
+<p><strong>Proving AB ≠ BA:</strong></p>
+<pre><code>Rotation A = [[0,-1],[1,0]], Scale B = [[2,0],[0,1]]
+A·B = [[0,-1],[2,0]]   (scale first, then rotate)
+B·A = [[0,-2],[1,0]]   (rotate first, then scale)
+Different! ✗
+</code></pre>
+<h2>Why this matters for ML</h2>
+<p><strong>Neural networks are chains of matrix multiplications.</strong> The full forward pass is <code>W₃·(W₂·(W₁·x))</code>. By associativity this equals <code>(W₃·W₂·W₁)·x</code> — without nonlinearities, a 10-layer network collapses into a single matrix multiplication. This is exactly why activation functions (ReLU, etc.) are essential between layers — they break the chain.</p>
+<p><strong>GPUs exist for matrix multiplication.</strong> Modern deep learning hardware is optimised for one thing: doing billions of matrix multiplications quickly in parallel. The entire deep learning revolution is partly a story about fast hardware for this one operation.</p>
+<p><strong>Attention in Transformers</strong> (<code>Q·Kᵀ</code>) is a matrix multiplication measuring how much each query and key agree.</p>
+<h2>The one thing to remember</h2>
+<p><code>A·B</code> = apply B first, then A. Order matters — this is not like multiplying numbers.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.3_matrices_as_transformations/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.3 — Matrices as Transformations</span>
+                    </a>
+                <a href="../1.5_rank_null_space_column_space/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.5 — Rank, Column Space &amp; Null Space</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

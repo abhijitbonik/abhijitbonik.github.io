@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.5 — Rank, Column Space &amp; Null Space — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.5 — Rank, Column Space &amp; Null Space | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.5 — Rank, Column Space &amp; Null Space
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.5 — Rank, Column Space &amp; Null Space</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.5 — Rank, Column Space &amp; Null Space</h1>
+<p><strong>Date:</strong> 2026-02-27 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>Every matrix transformation either preserves the full richness of space, or squashes some of it away. Rank measures how much survives. The column space is the "territory" the transformation can reach. The null space is what gets completely destroyed (sent to zero).</p>
+<h2>The intuition</h2>
+<p>Imagine shining a light through space onto a wall. The shadow on the wall is the column space — everything the transformation can output. The things that cast no shadow (they're aligned with the light beam) are the null space — they get completely flattened.</p>
+<p>A 2D matrix might:
+- Map the full plane to the full plane (rank 2 — nothing lost)
+- Squash the full plane onto a single line (rank 1 — one dimension destroyed)
+- Collapse everything to a point (rank 0 — total destruction)</p>
+<p>The higher the rank, the more the transformation preserves.</p>
+<h2>The math</h2>
+<p><strong>Column space:</strong> the set of all possible outputs of A·x (for any x).</p>
+<pre><code>Col(A) = span of the columns of A
+</code></pre>
+<p>This is the "landing zone" — every output lives here. It's called the column space because A·x is always a linear combination of A's columns.</p>
+<p><strong>Null space (kernel):</strong> the set of all inputs that get sent to zero.</p>
+<pre><code>Null(A) = { x : A·x = 0 }
+</code></pre>
+<p><strong>Rank:</strong> the dimension of the column space = number of linearly independent columns.</p>
+<p><strong>Rank-Nullity Theorem:</strong></p>
+<pre><code>rank(A) + nullity(A) = n     (n = number of columns)
+</code></pre>
+<p>Surviving dimensions + destroyed dimensions = total input dimensions. Always.</p>
+<h2>A worked example</h2>
+<pre><code>A = [ 1  2 ]
+    [ 2  4 ]
+</code></pre>
+<p>Notice column 2 = 2 × column 1 — they're the same direction. So the column space is just a single line (all multiples of [1,2]). <strong>Rank = 1.</strong></p>
+<p>Now find the null space (solve A·x = 0):</p>
+<pre><code>x₁ + 2x₂ = 0   →   x₁ = -2x₂
+</code></pre>
+<p>So x = t·[-2, 1] for any scalar t — a whole line of vectors all collapse to zero. <strong>Nullity = 1.</strong></p>
+<p>Check: rank + nullity = 1 + 1 = 2 = n ✓</p>
+<h2>Why this matters for ML</h2>
+<p><strong>Rank = expressive power.</strong> A weight matrix of rank r can only output in an r-dimensional subspace, no matter how high-dimensional the input. Low rank means the layer is a bottleneck — it can only express a limited range of transformations.</p>
+<p><strong>LoRA (Low-Rank Adaptation)</strong> fine-tunes giant language models by adding a low-rank update <code>A·B</code> where A is (d×r) and B is (r×d) with r tiny. The update has rank at most r — it only shifts the model in a small subspace of weight space. This is why you can fine-tune a 7B parameter model using a tiny fraction of the usual memory.</p>
+<p><strong>Multicollinear features break linear regression</strong> because the data matrix X becomes rank-deficient — its column space doesn't fill the output space, and the normal equations have no unique solution.</p>
+<h2>The one thing to remember</h2>
+<p>Rank tells you how many dimensions the transformation keeps. Null space is what it destroys. They always sum to the input dimension.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.4_matrix_multiplication/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.4 — Matrix Multiplication: Composition of Transformations</span>
+                    </a>
+                <a href="../1.6_determinants/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.6 — Determinants: Geometric Meaning</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

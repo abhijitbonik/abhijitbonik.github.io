@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Articles on Voice AI, Machine Learning, and Engineering by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>Blog | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html#about" class="nav-link">About</a></li>
+                <li><a href="../index.html#experience" class="nav-link">Experience</a></li>
+                <li><a href="../index.html#skills" class="nav-link">Skills</a></li>
+                <li><a href="../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../index.html#education" class="nav-link">Education</a></li>
+                <li><a href="../blog/index.html" class="nav-link active">Blog</a></li>
+                <li><a href="../readings/index.html" class="nav-link">Readings</a></li>
+                <li><a href="../index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="blog-hero">
+        <div class="container">
+            <span class="section-tag">&lt;blog&gt;</span>
+            <h1 class="section-title">Signal.broadcast</h1>
+            <p style="color:var(--text-secondary);margin-top:12px;font-family:var(--font-mono);font-size:0.85rem;letter-spacing:1px;">
+                Thoughts on Voice AI, Machine Learning, and Engineering
+            </p>
+        </div>
+    </div>
+
+    <section class="section" style="padding-top:0;">
+        <div class="container">
+            <div class="blog-filters">
+                <button class="filter-btn active" data-filter="all">All Posts</button>
+
+            </div>
+            <div class="blog-list">
+                <p style="font-family:var(--font-mono);color:var(--text-dim);">&gt; No posts yet. Add .md files to blog/ and push.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// thoughts worth sharing</p>
+        </div>
+    </footer>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const postItems   = document.querySelectorAll('.blog-list-item');
+        filterBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                filterBtns.forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                var filter = btn.dataset.filter;
+                postItems.forEach(function(item) {
+                    item.style.display = (filter === 'all' || item.dataset.category === filter) ? '' : 'none';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

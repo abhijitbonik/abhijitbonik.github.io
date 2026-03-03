@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.12 — Singular Value Decomposition (SVD) — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.12 — Singular Value Decomposition (SVD) | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.12 — Singular Value Decomposition (SVD)
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.12 — Singular Value Decomposition (SVD)</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.12 — Singular Value Decomposition (SVD)</h1>
+<p><strong>Date:</strong> 2026-03-02 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>Eigendecomposition is powerful but limited — it only works for square matrices. SVD is the generalisation that works for <em>any</em> matrix, any shape, any rank. It decomposes any matrix into three simple pieces: a rotation, a scaling, and another rotation. It is arguably the single most useful matrix factorisation in all of data science.</p>
+<h2>The intuition</h2>
+<p>Remember from Topic 1.3: any matrix transformation can be understood geometrically. SVD makes that geometrically precise. It says: <strong>any linear transformation is secretly just three simple operations chained together.</strong></p>
+<p>Take the unit circle (all vectors of length 1). Apply any matrix A to it. You always get an ellipse. The SVD tells you:
+- How much the ellipse is stretched in each direction (the singular values σ₁, σ₂, ...)
+- Which directions in the output space correspond to those stretches (the left singular vectors — columns of U)
+- Which directions in the input space get mapped to those stretches (the right singular vectors — columns of V)</p>
+<pre><code>Unit circle  →  [Vᵀ]  →  [Σ]  →  [U]  →  Ellipse
+
+Step 1 (Vᵀ): rotate input to align natural directions with axes
+Step 2 (Σ):  scale each axis independently (σ₁ stretches most, σ₂ next, ...)
+Step 3 (U):  rotate output to the right orientation
+
+Any transformation = rotate → scale → rotate. Always.
+</code></pre>
+<h2>The math</h2>
+<p><strong>The decomposition:</strong></p>
+<pre><code>A = U · Σ · Vᵀ
+</code></pre>
+<ul>
+<li>U (m×m): orthogonal — left singular vectors (directions in output space)</li>
+<li>Σ (m×n): diagonal — singular values σ₁ ≥ σ₂ ≥ ... ≥ 0 (the stretch factors)</li>
+<li>Vᵀ (n×n): orthogonal — right singular vectors (directions in input space)</li>
+</ul>
+<p>Works for any matrix (rectangular, rank-deficient, anything).</p>
+<p><strong>Connection to eigendecomposition:</strong></p>
+<pre><code>AᵀA = VΣ²Vᵀ   →   V = eigenvectors of AᵀA,   σᵢ = √(eigenvalue of AᵀA)
+AAᵀ = UΣ²Uᵀ   →   U = eigenvectors of AAᵀ
+</code></pre>
+<p>AᵀA is always symmetric and non-negative → eigenvalues always real and ≥ 0 → singular values always real and ≥ 0. This is why SVD always works.</p>
+<p><strong>Rank-1 expansion (the most useful form):</strong></p>
+<pre><code>A = σ₁·u₁v₁ᵀ + σ₂·u₂v₂ᵀ + ... + σᵣ·uᵣvᵣᵀ
+</code></pre>
+<p>Each term is a rank-1 matrix (an outer product). The terms are sorted from most important (σ₁ is largest) to least important (σᵣ is smallest).</p>
+<p><strong>Truncated SVD — the best low-rank approximation:</strong>
+Drop all but the top k terms:</p>
+<pre><code>Aₖ = σ₁·u₁v₁ᵀ + ... + σₖ·uₖvₖᵀ
+</code></pre>
+<p>The <em>Eckart-Young theorem</em> guarantees this is the best possible rank-k approximation of A — no other rank-k matrix is closer.</p>
+<p><strong>Key facts:</strong></p>
+<pre><code>rank(A) = number of non-zero singular values
+condition number = σ_max / σ_min   (large = near-singular = numerically dangerous)
+</code></pre>
+<h2>A worked example — image compression</h2>
+<p>An image is a matrix of pixel values, say 512×512. SVD gives 512 singular values. Plot them — the first few are enormous (they capture coarse structure: shapes, edges, gradients) and they decay rapidly (fine texture, noise are in the small ones).</p>
+<p>Keep only the top 50:</p>
+<pre><code>Original: 512×512 = 262,144 numbers
+Compressed: 50×(512+1+512) = 51,250 numbers  →  80% smaller
+Visual quality: often nearly indistinguishable
+</code></pre>
+<h2>Why this matters for ML</h2>
+<p><strong>Recommendation systems (Netflix Prize):</strong> you have a huge user×movie rating matrix — mostly empty (most users haven't rated most movies). SVD fills in the gaps by finding the low-rank structure: a few "taste dimensions" that explain most viewing patterns. The 2009 Netflix Prize was won with matrix factorisation — essentially truncated SVD.</p>
+<p><strong>Numerical stability:</strong> when you invert a matrix to solve linear regression, small singular values cause instability (dividing by near-zero). The condition number σ_max/σ_min tells you how bad the problem is. High condition number → need regularisation.</p>
+<p><strong>Pseudoinverse via SVD:</strong> <code>A⁺ = VΣ⁺Uᵀ</code> where Σ⁺ inverts the non-zero singular values and keeps zeros as zero. This is how numpy computes <code>lstsq</code> — it never explicitly inverts anything, it uses SVD.</p>
+<p><strong>PCA (Topic 1.13):</strong> SVD of the centred data matrix <em>directly</em> gives you the principal components. No need to compute the covariance matrix — just SVD of X̃.</p>
+<h2>The one thing to remember</h2>
+<p>Any matrix = rotate → scale → rotate. The singular values are the scale factors. Keep only the top k singular values and you have the best rank-k approximation of the matrix — this is truncated SVD, the foundation of PCA and recommendation systems.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.11_eigendecomposition_diagonalization/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.11 — Eigendecomposition &amp; Diagonalization</span>
+                    </a>
+                <a href="../1.13_pca_from_svd/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.13 — PCA Derived from SVD</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

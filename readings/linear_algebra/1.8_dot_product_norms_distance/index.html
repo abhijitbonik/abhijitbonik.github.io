@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.8 — Dot Product, Norms &amp; Distance Metrics — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.8 — Dot Product, Norms &amp; Distance Metrics | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.8 — Dot Product, Norms &amp; Distance Metrics
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.8 — Dot Product, Norms &amp; Distance Metrics</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.8 — Dot Product, Norms &amp; Distance Metrics</h1>
+<p><strong>Date:</strong> 2026-03-01 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>The dot product measures how much two vectors point in the same direction — it's a measure of alignment. Norms measure the size of a vector. Distance metrics measure how far apart two vectors are. Together, these tools let us measure relationships between vectors, which is the foundation of similarity, loss functions, and clustering.</p>
+<h2>The intuition</h2>
+<p><strong>Dot product:</strong> imagine two people pulling a box. If they pull in exactly the same direction, their efforts fully add up (large dot product). If they pull at right angles, neither helps the other (dot product = 0). If they pull in opposite directions, they cancel out (negative dot product).</p>
+<p><strong>Norms:</strong> different norms measure "size" in different ways. The L2 norm (Euclidean) is the straight-line distance — like a bird flying. The L1 norm is the block-walking distance — like a taxi in a city grid.</p>
+<p><strong>The shapes of unit balls</strong> (all points with norm = 1) show the difference intuitively:</p>
+<pre><code>L1 (diamond ◇):   L2 (circle ○):   L∞ (square □):
+      *                  *             *────*
+     /|\                / \            |    |
+    / | \              |   |           |    |
+   *──+──*              \ /            *────*
+    \ | /                *
+     \|/
+      *
+</code></pre>
+<p>The L1 diamond has sharp corners on the axes — this is why L1 regularization produces sparse solutions (the optimum lands on a corner, zeroing out weights).</p>
+<h2>The math</h2>
+<p><strong>Dot product (two equivalent forms):</strong></p>
+<pre><code>a · b = a₁b₁ + a₂b₂ + ... + aₙbₙ        ← algebraic (sum of products)
+a · b = ‖a‖ · ‖b‖ · cos(θ)               ← geometric (angle between them)
+</code></pre>
+<p>These always give the same number. θ is the angle between the vectors.</p>
+<p><strong>What the sign tells you:</strong>
+- <code>a·b &gt; 0</code> → pointing broadly in the same direction (θ &lt; 90°)
+- <code>a·b = 0</code> → perpendicular / orthogonal (θ = 90°) — share no direction at all
+- <code>a·b &lt; 0</code> → pointing broadly opposite (θ &gt; 90°)</p>
+<p><strong>Norms:</strong></p>
+<pre><code>L1: ‖v‖₁ = |v₁| + |v₂| + ... + |vₙ|       (sum of absolute values)
+L2: ‖v‖₂ = √(v₁² + v₂² + ... + vₙ²)       (Euclidean length)
+L∞: ‖v‖∞ = max(|v₁|, |v₂|, ..., |vₙ|)    (largest absolute value)
+</code></pre>
+<p><strong>Cosine similarity</strong> (direction only, ignores magnitude):</p>
+<pre><code>cos_sim(a, b) = (a · b) / (‖a‖ · ‖b‖)   ∈ [−1, 1]
+</code></pre>
+<h2>A worked example</h2>
+<pre><code>a = [1, 2, 3],  b = [4, 0, 1]
+a · b = 1·4 + 2·0 + 3·1 = 7   (positive → broadly same direction)
+
+v = [3, -4]
+‖v‖₁ = 3 + 4 = 7
+‖v‖₂ = √(9+16) = 5
+‖v‖∞ = max(3,4) = 4
+</code></pre>
+<h2>Why this matters for ML</h2>
+<p><strong>Attention mechanism</strong> in Transformers: <code>Attention(Q,K,V) = softmax(Q·Kᵀ/√d)·V</code>. The <code>Q·Kᵀ</code> computes dot products between every query and every key. A high dot product = high attention = "these tokens are related." The entire mechanism of attention is the dot product measuring directional alignment.</p>
+<p><strong>Word embeddings and cosine similarity:</strong> "King" and "Queen" have a high cosine similarity in embedding space — they point in similar directions even though their exact vectors differ. Cosine similarity is used because we care about the direction of meaning, not the magnitude.</p>
+<p><strong>L1 vs L2 regularization:</strong> L1 penalises <code>‖w‖₁</code> and produces sparse weights (many exactly zero, because the diamond corners land on axes). L2 penalises <code>‖w‖₂²</code> and smoothly shrinks all weights but rarely reaches zero. The geometry of the unit ball explains the behavior.</p>
+<h2>The one thing to remember</h2>
+<p>The dot product measures alignment. Zero dot product = completely perpendicular = no shared direction. This is the foundation of attention, similarity search, and regularization.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.7_inverse_matrices/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.7 — Inverse Matrices and When They Exist</span>
+                    </a>
+                <a href="../1.9_projections_orthogonality/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.9 — Projections and Orthogonality</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

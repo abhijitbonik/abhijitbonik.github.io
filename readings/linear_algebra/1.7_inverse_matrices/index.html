@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.7 — Inverse Matrices and When They Exist — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.7 — Inverse Matrices and When They Exist | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.7 — Inverse Matrices and When They Exist
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.7 — Inverse Matrices and When They Exist</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.7 — Inverse Matrices and When They Exist</h1>
+<p><strong>Date:</strong> 2026-03-01 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>The inverse of a matrix is the "undo" transformation. If A rotates space 90° clockwise, then A⁻¹ rotates it 90° counterclockwise. Applying A then A⁻¹ gets you back exactly where you started — a net effect of doing nothing.</p>
+<h2>The intuition</h2>
+<p>Every invertible transformation can be reversed. You rotate → you can un-rotate. You stretch → you can un-stretch. But what if you squash the entire plane down to a single line? You've thrown away information — you can't reconstruct a plane from a line. No inverse exists.</p>
+<p>This is the key: <strong>an inverse exists if and only if no information was destroyed.</strong></p>
+<pre><code>Invertible:          Not invertible:
+
+plane → plane        plane → line
+(reversible)         (information lost — can't go back)
+</code></pre>
+<h2>The math</h2>
+<p><strong>Definition:</strong> A⁻¹ is the unique matrix satisfying:</p>
+<pre><code>A · A⁻¹ = I    and    A⁻¹ · A = I
+</code></pre>
+<p><strong>Formula for 2×2:</strong></p>
+<pre><code>A = [ a  b ]       A⁻¹ = 1/det(A) · [  d  -b ]
+    [ c  d ]                          [ -c   a ]
+</code></pre>
+<p>Steps: (1) swap diagonal elements, (2) negate off-diagonal, (3) divide by det(A).</p>
+<p>If det(A) = 0, this formula blows up (division by zero) → no inverse exists.</p>
+<p><strong>When the inverse exists — all five say the same thing:</strong></p>
+<pre><code>A is invertible
+  ⟺ det(A) ≠ 0
+  ⟺ rank(A) = n
+  ⟺ null space = {0}
+  ⟺ columns are linearly independent
+  ⟺ no dimension is destroyed
+</code></pre>
+<h2>A worked example</h2>
+<pre><code>A = [ 3  1 ]    det = 3·1 − 1·2 = 1
+    [ 2  1 ]
+
+A⁻¹ = (1/1) · [  1  -1 ]  =  [  1  -1 ]
+               [ -2   3 ]     [ -2   3 ]
+
+Verify A·A⁻¹:
+[ 3  1 ] · [  1  -1 ]  =  [ 3-2   -3+3 ]  =  [ 1  0 ]  ✓
+[ 2  1 ]   [ -2   3 ]     [ 2-2   -2+3 ]     [ 0  1 ]
+</code></pre>
+<h2>Why this matters for ML</h2>
+<p><strong>Linear regression normal equations:</strong> the formula <code>w = (XᵀX)⁻¹Xᵀy</code> requires <code>(XᵀX)</code> to be invertible. When features are correlated (linearly dependent), <code>XᵀX</code> becomes singular and has no inverse — the equation breaks down.</p>
+<p><strong>Never explicitly compute the inverse in code.</strong> <code>inv(A) @ b</code> is slower and numerically less stable than <code>np.linalg.solve(A, b)</code>. Always use a solver — it gets you <code>A⁻¹b</code> without ever forming A⁻¹.</p>
+<p><strong>Ridge regression</strong> adds <code>λI</code> to fix invertibility: <code>w = (XᵀX + λI)⁻¹Xᵀy</code>. Adding λI to the diagonal guarantees det ≠ 0 for any λ &gt; 0. This is both a numerical fix and (it turns out) a Bayesian prior on the weights.</p>
+<p><strong>Pseudoinverse</strong> handles non-square matrices: <code>A⁺ = VΣ⁺Uᵀ</code> (via SVD). This finds the best approximate solution when an exact inverse doesn't exist — which is exactly what least-squares regression computes.</p>
+<h2>The one thing to remember</h2>
+<p>The inverse "undoes" a transformation. It exists if and only if nothing was squashed — when det ≠ 0 and rank = n.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.6_determinants/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.6 — Determinants: Geometric Meaning</span>
+                    </a>
+                <a href="../1.8_dot_product_norms_distance/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.8 — Dot Product, Norms &amp; Distance Metrics</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="1.9 — Projections and Orthogonality — Readings by Abhijit Bonik">
+    <meta name="author" content="Abhijit Bonik">
+    <title>1.9 — Projections and Orthogonality | Readings | Abhijit Bonik</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <link rel="stylesheet" href="../../../assets/css/style.css">
+</head>
+<body>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanline-overlay"></div>
+
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="../../../index.html" class="nav-logo" aria-label="Home">
+                <span class="logo-bracket">[</span>AB<span class="logo-bracket">]</span>
+            </a>
+            <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../../../index.html#about"          class="nav-link">About</a></li>
+                <li><a href="../../../index.html#experience"     class="nav-link">Experience</a></li>
+                <li><a href="../../../index.html#skills"         class="nav-link">Skills</a></li>
+                <li><a href="../../../index.html#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="../../../index.html#education"      class="nav-link">Education</a></li>
+                <li><a href="../../../blog/index.html"           class="nav-link">Blog</a></li>
+                <li><a href="../../../readings/index.html"       class="nav-link active">Readings</a></li>
+                <li><a href="../../../index.html#contact"        class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="reading-article-page">
+        <div class="container">
+
+            <div class="readings-breadcrumb">
+                <a href="../../index.html">Readings</a>
+                <span class="bc-sep">/</span>
+                <a href="../index.html">Linear Algebra</a>
+                <span class="bc-sep">/</span>
+                1.9 — Projections and Orthogonality
+            </div>
+
+            <header class="reading-article-header">
+                <h1 class="reading-article-title">1.9 — Projections and Orthogonality</h1>
+                
+            </header>
+
+            <article class="markdown-body">
+<h1>1.9 — Projections and Orthogonality</h1>
+<p><strong>Date:</strong> 2026-03-02 | <strong>Block:</strong> 1 — Linear Algebra</p>
+<h2>The idea in plain English</h2>
+<p>A projection is the "shadow" of one vector cast along another direction. If you shine a light straight down on an arrow, the shadow on the floor is the projection onto the horizontal. This simple geometric idea turns out to be the hidden geometry behind linear regression, PCA, and least-squares problems.</p>
+<h2>The intuition</h2>
+<p>You have a vector <code>b</code> and a direction <code>a</code>. You want the closest point to <code>b</code> that lies on the line through <code>a</code>. That closest point is the projection.</p>
+<pre><code>                b
+               /|
+              / |  ← this gap is the residual (error)
+             /  |    it is always perpendicular to a
+            /   |
+───────────*────*──────────→  direction a
+                ↑
+           projection of b onto a
+           (the &quot;shadow&quot;)
+</code></pre>
+<p>The residual (the gap between b and its shadow) is always <strong>orthogonal</strong> to the direction <code>a</code>. This is what makes it the <em>closest</em> point — if it weren't perpendicular, you could get even closer by sliding along <code>a</code>.</p>
+<p>This picture is hiding inside linear regression. The predicted values <code>ŷ = Xw</code> are the projection of <code>y</code> onto the column space of X. The residuals <code>y − ŷ</code> are always perpendicular to every feature column.</p>
+<h2>The math</h2>
+<p><strong>Derivation:</strong> we want <code>p = c·a</code> (lies on <code>a</code>) such that <code>(b − p) ⊥ a</code>:</p>
+<pre><code>a · (b − c·a) = 0
+a·b − c(a·a) = 0
+c = (a·b) / ‖a‖²          ← scalar projection (how far along a)
+</code></pre>
+<p><strong>Vector projection:</strong></p>
+<pre><code>proj_a(b) = c · a = (a·b / ‖a‖²) · a
+</code></pre>
+<p><strong>Projection matrix</strong> (turns projection into a matrix operation):</p>
+<pre><code>P = a·aᵀ / ‖a‖²     →     proj_a(b) = P·b
+</code></pre>
+<p><strong>Idempotent property:</strong> <code>P² = P</code>. Projecting twice = projecting once — once you're on the line, you stay there.</p>
+<p><strong>Projection onto a subspace (column space of A):</strong></p>
+<pre><code>P = A(AᵀA)⁻¹Aᵀ
+</code></pre>
+<p>The residual <code>(b − Pb)</code> is orthogonal to every column of A.</p>
+<h2>A worked example</h2>
+<pre><code>a = [2, 1],   b = [3, 3]
+
+c = (a·b) / ‖a‖² = (2·3 + 1·3) / (4+1) = 9/5
+
+projection = (9/5)·[2,1] = [3.6, 1.8]
+residual   = [3-3.6, 3-1.8] = [-0.6, 1.2]
+
+Check orthogonality: a · residual = 2·(-0.6) + 1·(1.2) = 0 ✓
+</code></pre>
+<h2>Why this matters for ML</h2>
+<p><strong>Linear regression IS a projection.</strong> You want <code>Xw = y</code>, but <code>y</code> might not lie in the column space of X (no exact fit). The best you can do is project <code>y</code> onto the column space of X. That projection is <code>ŷ = X(XᵀX)⁻¹Xᵀy</code>, which gives the normal equations <code>w = (XᵀX)⁻¹Xᵀy</code>. This is not a coincidence — regression <em>is</em> projection, derived from geometry, no calculus needed.</p>
+<p><strong>Residuals are always perpendicular to features.</strong> In any linear regression, <code>(y − Xw) ⊥ X</code> — the errors are orthogonal to every input feature. This is the optimality condition — you can't reduce the error further without changing the model.</p>
+<p><strong>PCA uses projection.</strong> When you "project data onto the first 2 principal components," you are doing exactly <code>Z = X̃·Vₖ</code> and reconstructing with <code>Z·Vₖᵀ</code> — a projection onto the principal subspace, exactly the formula from today.</p>
+<h2>The one thing to remember</h2>
+<p>The projection is the closest point on a line (or subspace) to your target. The residual is always perpendicular to the line. This geometry IS linear regression.</p>
+            </article>
+
+            
+            <div class="reading-article-nav">
+                <a href="../1.8_dot_product_norms_distance/index.html" class="reading-nav-link reading-nav-prev">
+                        <span class="reading-nav-label">← Previous</span>
+                        <span class="reading-nav-title">1.8 — Dot Product, Norms &amp; Distance Metrics</span>
+                    </a>
+                <a href="../1.10_eigenvalues_eigenvectors/index.html" class="reading-nav-link reading-nav-next">
+                        <span class="reading-nav-label">Next →</span>
+                        <span class="reading-nav-title">1.10 — Eigenvalues &amp; Eigenvectors</span>
+                    </a>
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                <span class="footer-bracket">[</span> abhijit bonik <span class="footer-bracket">]</span>
+            </p>
+            <p class="footer-sub">// knowledge is meant to be shared</p>
+        </div>
+    </footer>
+    <script src="../../../assets/js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>document.addEventListener("DOMContentLoaded",()=>hljs.highlightAll());</script>
+
+</body>
+</html>
